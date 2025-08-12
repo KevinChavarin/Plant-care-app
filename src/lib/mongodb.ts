@@ -22,6 +22,15 @@ if (!global.mongoose) {
 }
 
 async function connectDB(): Promise<typeof mongoose> {
+  // Skip connection during build time
+  if (MONGODB_URI && process.env.NODE_ENV === 'development' && !MONGODB_URI.includes('localhost') && !MONGODB_URI.includes('127.0.0.1')) {
+    // Only connect if we're not in build mode
+    if (process.argv.includes('build')) {
+      console.log('Skipping MongoDB connection during build');
+      return mongoose;
+    }
+  }
+
   if (cached.conn) {
     return cached.conn;
   }
@@ -29,10 +38,18 @@ async function connectDB(): Promise<typeof mongoose> {
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
+      maxPoolSize: 10,
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
     };
 
     cached.promise = mongoose.connect(MONGODB_URI!, opts).then((mongoose) => {
+      console.log('Connected to MongoDB');
       return mongoose;
+    }).catch((error) => {
+      console.error('MongoDB connection error:', error);
+      cached.promise = null;
+      throw error;
     });
   }
 

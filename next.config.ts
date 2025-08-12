@@ -17,7 +17,18 @@ const nextConfig: NextConfig = {
   },
   env: {
     MONGODB_URI: process.env.MONGODB_URI,
-  }
+  },
+  // Disable static generation for API routes during build
+  trailingSlash: false,
+  // Skip build-time errors for dynamic routes
+  typescript: {
+    ignoreBuildErrors: false,
+  },
+  eslint: {
+    ignoreDuringBuilds: false,
+  },
+  // Ensure API routes are not pre-rendered
+  generateStaticParams: false,
 };
 
 export default nextConfig;

@@ -4,11 +4,11 @@ import { PlantModel } from '@/models/Plant';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
     await connectDB();
-    const { id } = await params;
+    const { id } = params;
     const plant = await PlantModel.findById(id);
     
     if (!plant) {
@@ -30,11 +30,11 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
     await connectDB();
-    const { id } = await params;
+    const { id } = params;
     const plantData = await request.json();
     
     const plant = await PlantModel.findByIdAndUpdate(
@@ -62,11 +62,11 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
     await connectDB();
-    const { id } = await params;
+    const { id } = params;
     const plant = await PlantModel.findByIdAndDelete(id);
     
     if (!plant) {
