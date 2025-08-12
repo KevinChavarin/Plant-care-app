@@ -1,36 +1,158 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PlantCare - Aplicación de Cuidado de Plantas
 
-## Getting Started
+Una aplicación web moderna para gestionar el cuidado de plantas con categorización avanzada según sus necesidades hídricas, hábitat y requerimientos de luz solar.
 
-First, run the development server:
+## 🌱 Características
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Categorización Avanzada
+- **Necesidades de Riego**: Xerófitas, Mesófitas e Higrófitas
+- **Hábitat**: Tropicales, Desérticas, Templadas, Mediterráneas, Subtropicales y Alpinas  
+- **Luz Solar**: Sol directo, Semisombra y Sombra
+
+### Funcionalidades
+- ✅ CRUD completo de plantas
+- ✅ Sistema de filtros avanzado
+- ✅ Búsqueda inteligente
+- ✅ Responsive design
+- ✅ Paleta de colores "Brisa Neutra"
+- ✅ Integración con MongoDB
+- 🔄 Sistema de logging de cuidados (próximamente)
+- 🔄 Recordatorios de riego (próximamente)
+- 🔄 Calendario de cuidados (próximamente)
+
+## 🎨 Diseño
+
+La aplicación utiliza una paleta de colores minimalista llamada "Brisa Neutra":
+- **Verde Salvia** (#9caf88): Color principal y acentos
+- **Negro Suave** (#2c2c2c): Texto principal
+- **Grises** (#6b6b6b, #d4d4d4): Texto secundario y bordes
+- **Blancos** (#ffffff, #f8f8f8): Fondos y cards
+
+## 🚀 Tecnologías
+
+- **Frontend**: Next.js 15, React 19, TypeScript
+- **Styling**: Tailwind CSS 4
+- **Base de Datos**: MongoDB con Mongoose
+- **Icons**: Lucide React
+- **Deployment**: Vercel-ready
+
+## 📋 Prerequisitos
+
+- Node.js 18+
+- MongoDB (local o Atlas)
+- npm o yarn
+
+## 🛠️ Instalación
+
+1. **Clonar el repositorio**
+   ```bash
+   git clone <url-del-repo>
+   cd plant-care
+   ```
+
+2. **Instalar dependencias**
+   ```bash
+   npm install
+   ```
+
+3. **Configurar variables de entorno**
+   ```bash
+   cp .env.example .env.local
+   ```
+   
+   Editar `.env.local` con tu URI de MongoDB:
+   ```
+   MONGODB_URI=mongodb://localhost:27017/plantcare
+   ```
+
+4. **Ejecutar en desarrollo**
+   ```bash
+   npm run dev
+   ```
+
+5. **Abrir en el navegador**
+   ```
+   http://localhost:3000
+   ```
+
+## 📊 Estructura del Proyecto
+
+```
+src/
+├── app/                    # App Router de Next.js
+│   ├── api/               # API Routes
+│   │   └── plants/        # Endpoints de plantas
+│   ├── layout.tsx         # Layout principal
+│   └── page.tsx           # Página principal
+├── components/            # Componentes React
+│   ├── Header.tsx         # Barra de navegación
+│   ├── FilterPanel.tsx    # Panel de filtros
+│   ├── PlantCard.tsx      # Tarjeta de planta
+│   └── PlantForm.tsx      # Formulario de planta
+├── lib/                   # Utilidades
+│   └── mongodb.ts         # Conexión a MongoDB
+├── models/                # Modelos de Mongoose
+│   └── Plant.ts           # Modelo de Planta
+├── types/                 # Tipos de TypeScript
+│   └── plant.ts           # Tipos de planta
+└── styles/               # Estilos globales
+    └── globals.css       # CSS personalizado
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🌿 Modelo de Datos
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Planta
+```typescript
+interface Plant {
+  name: string;                    // Nombre común
+  scientificName?: string;         // Nombre científico
+  description: string;             // Descripción
+  waterNeed: WaterNeed;           // xerophyte | mesophyte | hygrophyte
+  habitat: Habitat;               // tropical | desert | temperate | etc
+  lightRequirement: LightRequirement; // sun | partial-shade | shade
+  careInstructions: {
+    watering: string;
+    fertilizing?: string;
+    pruning?: string;
+    temperature?: string;
+  };
+  difficulty: 'easy' | 'medium' | 'hard';
+  isIndoor: boolean;
+  bloomingSeason?: string[];
+  maxHeight?: string;
+  imageUrl?: string;
+}
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🎯 Próximas Características
 
-## Learn More
+- [ ] Sistema de logging de cuidados
+- [ ] Recordatorios automáticos
+- [ ] Calendario de actividades
+- [ ] Exportar/Importar datos
+- [ ] Galería de fotos
+- [ ] Estadísticas de cuidado
+- [ ] Compartir plantas en redes sociales
+- [ ] Modo offline con PWA
 
-To learn more about Next.js, take a look at the following resources:
+## 🤝 Contribuir
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Fork del proyecto
+2. Crear branch de feature (`git checkout -b feature/nueva-caracteristica`)
+3. Commit cambios (`git commit -am 'Agregar nueva característica'`)
+4. Push al branch (`git push origin feature/nueva-caracteristica`)
+5. Crear Pull Request
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📝 Licencia
 
-## Deploy on Vercel
+Este proyecto está bajo la licencia MIT. Ver `LICENSE` para más detalles.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🙏 Créditos
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Icons por [Lucide](https://lucide.dev/)
+- Diseño inspirado en principios de diseño material y minimalista
+- Paleta de colores "Brisa Neutra" - diseño original
+
+---
+
+**PlantCare** - Cuidado inteligente para plantas felices 🌱

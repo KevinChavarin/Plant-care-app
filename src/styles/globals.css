@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+/* Paleta de colores "Brisa Neutra" */
+:root {
+  --sage-green: #9caf88;
+  --sage-green-dark: #7a8f63;
+  --sage-green-light: #b8c9a6;
+  --soft-black: #2c2c2c;
+  --charcoal: #404040;
+  --warm-gray: #6b6b6b;
+  --light-gray: #d4d4d4;
+  --off-white: #f8f8f8;
+  --pure-white: #ffffff;
+  
+  --background: var(--off-white);
+  --foreground: var(--soft-black);
+  --card-bg: var(--pure-white);
+  --border: var(--light-gray);
+  --accent: var(--sage-green);
+  --accent-dark: var(--sage-green-dark);
+  --muted: var(--warm-gray);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card-bg);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  
+  /* Custom colors for plant categories */
+  --color-xerophyte: #d4a574;
+  --color-mesophyte: #9caf88;
+  --color-hygrophyte: #7ba3a3;
+  --color-tropical: #8fbc8f;
+  --color-desert: #deb887;
+  --color-temperate: #87ceeb;
+  --color-sun: #ffd700;
+  --color-partial-shade: #ffa500;
+  --color-shade: #696969;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--soft-black);
+    --foreground: var(--off-white);
+    --card-bg: var(--charcoal);
+    --border: var(--warm-gray);
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Utility classes for plant categories */
+.water-xerophyte { @apply bg-orange-100 text-orange-800 border-orange-200; }
+.water-mesophyte { @apply bg-green-100 text-green-800 border-green-200; }
+.water-hygrophyte { @apply bg-blue-100 text-blue-800 border-blue-200; }
+
+.habitat-tropical { @apply bg-emerald-100 text-emerald-800 border-emerald-200; }
+.habitat-desert { @apply bg-yellow-100 text-yellow-800 border-yellow-200; }
+.habitat-temperate { @apply bg-sky-100 text-sky-800 border-sky-200; }
+.habitat-mediterranean { @apply bg-purple-100 text-purple-800 border-purple-200; }
+
+.light-sun { @apply bg-amber-100 text-amber-800 border-amber-200; }
+.light-partial-shade { @apply bg-orange-100 text-orange-800 border-orange-200; }
+.light-shade { @apply bg-gray-100 text-gray-800 border-gray-200; }
